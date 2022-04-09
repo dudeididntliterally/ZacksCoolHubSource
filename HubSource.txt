@@ -1,0 +1,1629 @@
+if game.PlaceId == 2377868063 then
+
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
+    Text = "Strucid: Zack's Cool Hub Loaded. (MADE BY FromTheDarkness#6257) AND SUBSCRIBE TO IRAXS ON YOUTUBE :)",
+    Color = Color3.fromRGB(0, 255, 0)
+    })
+    
+    wait(1)
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/mag"))()
+    local Main = Library.Category("Main", "Main Code", Color3.fromRGB(0, 0, 255))
+    local More = Library.Category("More", "MORE MODS", Color3.fromRGB(0, 0, 255))
+    local Credits = Library.Category("Credits", "All Credits", Color3.fromRGB(0, 0, 255))
+    Main:Section("Main Scripts")
+    More:Section("MORE MODS")
+    Main:Button(
+        "Silent Aim",
+        function()
+        getgenv().Settings = {
+        Enabled = true,
+    }
+    
+    
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Mouse = LocalPlayer:GetMouse()
+    local Camera = game.Workspace.CurrentCamera
+    local RunService = game:GetService("RunService")
+    local UserInputService = game:GetService("UserInputService")
+    
+    
+    
+    function IsAlive()
+        if Players.LocalPlayer.PlayerGui:FindFirstChild("MainGui") then
+            return true
+        end
+        return false
+    end
+    
+    
+    function Closest()
+        local Distance = math.huge
+        local Closest
+        if IsAlive() then
+            for i,v in pairs(Players:GetPlayers()) do
+                if v ~= LocalPlayer then
+                    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+                        local Pos, OnScreen = Camera:WorldToScreenPoint(v.Character.Head.Position)
+                        local RealMouse = UserInputService:GetMouseLocation()
+                        local Dist = (Vector2.new(Pos.X, Pos.Y) - Vector2.new(RealMouse.X, RealMouse.Y)).Magnitude
+                        if Dist < Distance then
+                            Distance = Dist
+                            Closest = v
+                        end
+                    end
+                end
+            end
+        end
+        return Closest
+    end
+    
+    LocalPlayer.PlayerGui.ChildAdded:Connect(function(child)
+        if child.Name == "MainGui" then
+            local Module = require(child:FindFirstChild("NewLocal").Tools.Tool.Gun)
+            local Old = Module.ConeOfFire
+            Module.ConeOfFire = function(...)
+                local closest = Closest()
+                if closest ~= nil and Settings.Enabled then
+                    return closest.Character.HumanoidRootPart.CFrame.p
+                end
+                return Old(...)
+            end
+        end
+    end)
+        end
+    )
+    Main:Button(
+        "ESP",
+        function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/fernandoagoncalves/universal-esp/main/esp.lua", true))()
+        end
+    )
+    Main:Button(
+        "Inf Jump",
+        function()
+            local Player = game:GetService'Players'.LocalPlayer;
+        local UIS = game:GetService'UserInputService';
+    
+        _G.JumpHeight = 80;
+    
+        function Action(Object, Function) if Object ~= nil then Function(Object); end end
+    
+        UIS.InputBegan:connect(function(UserInput)
+            if UserInput.UserInputType == Enum.UserInputType.Keyboard and UserInput.KeyCode == Enum.KeyCode.Space then
+                Action(Player.Character.Humanoid, function(self)
+                    if self:GetState() == Enum.HumanoidStateType.Jumping or self:GetState() == Enum.HumanoidStateType.Freefall then
+                        Action(self.Parent.HumanoidRootPart, function(self)
+                            self.Velocity = Vector3.new(0, _G.JumpHeight, 0);
+                        end)
+                    end
+                end)
+            end
+        end)
+    end
+    )
+    
+    Main:Button(
+        "No Debounce",
+        function()
+    local ModTac = require(game.ReplicatedStorage.Weapons.Modules["Tac Shotgun"])
+    local ModSupSMG = require(game.ReplicatedStorage.Weapons.Modules["Suppressed SMG"])
+    local ModRPG = require(game.ReplicatedStorage.Weapons.Modules["RPG"])
+    local ModSMG = require(game.ReplicatedStorage.Weapons.Modules["SMG"])
+    local ModPumpShotgun = require(game.ReplicatedStorage.Weapons.Modules["Pump Shotgun"])
+    local ModBurstAR = require(game.ReplicatedStorage.Weapons.Modules["Burst AR"])
+    local ModAssaultRifle = require(game.ReplicatedStorage.Weapons.Modules["Assault Rifle"])
+    local ModDrum = require(game.ReplicatedStorage.Weapons.Modules["Drum Gun"])
+    local ModCombatAR = require(game.ReplicatedStorage.Weapons.Modules["Combat AR"])
+    local ModHawk = require(game.ReplicatedStorage.Weapons.Modules["Desert Hawk"])
+    local ModCombatBurst = require(game.ReplicatedStorage.Weapons.Modules["Combat Burst"])
+    local ModHuntingRifle = require(game.ReplicatedStorage.Weapons.Modules["Hunting Rifle"])
+    local ModAssaultSMG = require(game.ReplicatedStorage.Weapons.Modules["Assault SMG"])
+    local ModPistol = require(game.ReplicatedStorage.Weapons.Modules["Pistol"])
+    local ModFlintCannon = require(game.ReplicatedStorage.Weapons.Modules["Flint Cannon"])
+    local ModSuppPistol = require(game.ReplicatedStorage.Weapons.Modules["Suppressed Pistol"])
+    local ModNERFBlaster = require(game.ReplicatedStorage.Weapons.Modules["NERF Blaster"])
+    local ModHeavyAR = require(game.ReplicatedStorage.Weapons.Modules["Heavy AR"])
+    local ModScopedAR = require(game.ReplicatedStorage.Weapons.Modules["Scoped AR"])
+    
+        ModTac["Debounce"] = 0.01
+        ModSupSMG["Debounce"] = 0.01
+        ModSMG["Debounce"] = 0.01
+        ModRPG["Debounce"] = 0.01
+        ModPumpShotgun["Debounce"] = 0.01
+        ModBurstAR["Debounce"] = 0.01
+        ModPistol["Debounce"] = 0.01
+        ModDrum["Debounce"] = 0.01
+        ModAssaultRifle["Debounce"] = 0.01
+        ModCombatAR["Debounce"] = 0.01
+        ModHawk["Debounce"] = 0.01
+        ModCombatBurst["Debounce"] = 0.01
+        ModHuntingRifle["Debounce"] = 0.01
+        ModAssaultSMG["Debounce"] = 0.01
+        ModFlintCannon["Debounce"] = 0.01
+        ModSuppPistol["Debounce"] = 0.01
+        ModNERFBlaster["Debounce"] = 0.01
+        ModHeavyAR["Debounce"] = 0.01
+        ModScopedAR["Debounce"] = 0.01
+    end
+    )
+    
+    Main:Button(
+        "No Recoil",
+        function()
+    local ModTac = require(game.ReplicatedStorage.Weapons.Modules["Tac Shotgun"])
+    local ModSupSMG = require(game.ReplicatedStorage.Weapons.Modules["Suppressed SMG"])
+    local ModRPG = require(game.ReplicatedStorage.Weapons.Modules["RPG"])
+    local ModSMG = require(game.ReplicatedStorage.Weapons.Modules["SMG"])
+    local ModPumpShotgun = require(game.ReplicatedStorage.Weapons.Modules["Pump Shotgun"])
+    local ModBurstAR = require(game.ReplicatedStorage.Weapons.Modules["Burst AR"])
+    local ModAssaultRifle = require(game.ReplicatedStorage.Weapons.Modules["Assault Rifle"])
+    local ModDrum = require(game.ReplicatedStorage.Weapons.Modules["Drum Gun"])
+    local ModCombatAR = require(game.ReplicatedStorage.Weapons.Modules["Combat AR"])
+    local ModHawk = require(game.ReplicatedStorage.Weapons.Modules["Desert Hawk"])
+    local ModCombatBurst = require(game.ReplicatedStorage.Weapons.Modules["Combat Burst"])
+    local ModHuntingRifle = require(game.ReplicatedStorage.Weapons.Modules["Hunting Rifle"])
+    local ModAssaultSMG = require(game.ReplicatedStorage.Weapons.Modules["Assault SMG"])
+    local ModPistol = require(game.ReplicatedStorage.Weapons.Modules["Pistol"])
+    local ModFlintCannon = require(game.ReplicatedStorage.Weapons.Modules["Flint Cannon"])
+    local ModSuppPistol = require(game.ReplicatedStorage.Weapons.Modules["Suppressed Pistol"])
+    local ModNERFBlaster = require(game.ReplicatedStorage.Weapons.Modules["NERF Blaster"])
+    local ModHeavyAR = require(game.ReplicatedStorage.Weapons.Modules["Heavy AR"])
+    local ModScopedAR = require(game.ReplicatedStorage.Weapons.Modules["Scoped AR"])
+    
+        ModTac["Recoil"] = 0
+        ModSupSMG["Recoil"] = 0
+        ModSMG["Recoil"] = 0
+        ModRPG["Recoil"] = 0
+        ModPumpShotgun["Recoil"] = 0
+        ModBurstAR["Recoil"] = 0
+        ModPistol["Recoil"] = 0
+        ModDrum["Recoil"] = 0
+        ModAssaultRifle["Recoil"] = 0
+        ModCombatAR["Recoil"] = 0
+        ModHawk["Recoil"] = 0
+        ModCombatBurst["Recoil"] = 0
+        ModHuntingRifle["Recoil"] = 0
+        ModAssaultSMG["Recoil"] = 0
+        ModFlintCannon["Recoil"] = 0
+        ModSuppPistol["Recoil"] = 0
+        ModNERFBlaster["Recoil"] = 0
+        ModHeavyAR["Recoil"] = 0
+        ModScopedAR["Recoil"] = 0
+    end
+    )
+    
+    Main:Button(
+        "No Inaccuracy",
+        function()
+    local ModTac = require(game.ReplicatedStorage.Weapons.Modules["Tac Shotgun"])
+    local ModSupSMG = require(game.ReplicatedStorage.Weapons.Modules["Suppressed SMG"])
+    local ModRPG = require(game.ReplicatedStorage.Weapons.Modules["RPG"])
+    local ModSMG = require(game.ReplicatedStorage.Weapons.Modules["SMG"])
+    local ModPumpShotgun = require(game.ReplicatedStorage.Weapons.Modules["Pump Shotgun"])
+    local ModBurstAR = require(game.ReplicatedStorage.Weapons.Modules["Burst AR"])
+    local ModAssaultRifle = require(game.ReplicatedStorage.Weapons.Modules["Assault Rifle"])
+    local ModDrum = require(game.ReplicatedStorage.Weapons.Modules["Drum Gun"])
+    local ModCombatAR = require(game.ReplicatedStorage.Weapons.Modules["Combat AR"])
+    local ModHawk = require(game.ReplicatedStorage.Weapons.Modules["Desert Hawk"])
+    local ModCombatBurst = require(game.ReplicatedStorage.Weapons.Modules["Combat Burst"])
+    local ModHuntingRifle = require(game.ReplicatedStorage.Weapons.Modules["Hunting Rifle"])
+    local ModAssaultSMG = require(game.ReplicatedStorage.Weapons.Modules["Assault SMG"])
+    local ModPistol = require(game.ReplicatedStorage.Weapons.Modules["Pistol"])
+    local ModFlintCannon = require(game.ReplicatedStorage.Weapons.Modules["Flint Cannon"])
+    local ModSuppPistol = require(game.ReplicatedStorage.Weapons.Modules["Suppressed Pistol"])
+    local ModNERFBlaster = require(game.ReplicatedStorage.Weapons.Modules["NERF Blaster"])
+    local ModHeavyAR = require(game.ReplicatedStorage.Weapons.Modules["Heavy AR"])
+    local ModScopedAR = require(game.ReplicatedStorage.Weapons.Modules["Scoped AR"])
+    
+        ModTac["Inaccuracy"] = 0.01
+        ModSupSMG["Inaccuracy"] = 0.01
+        ModSMG["Inaccuracy"] = 0.01
+        ModRPG["Inaccuracy"] = 0.01
+        ModPumpShotgun["Inaccuracy"] = 0.01
+        ModBurstAR["Inaccuracy"] = 0.01
+        ModPistol["Inaccuracy"] = 0.01
+        ModDrum["Inaccuracy"] = 0.01
+        ModAssaultRifle["Inaccuracy"] = 0.01
+        ModCombatAR["Inaccuracy"] = 0.01
+        ModHawk["Inaccuracy"] = 0.01
+        ModCombatBurst["Inaccuracy"] = 0.01
+        ModHuntingRifle["Inaccuracy"] = 0.01
+        ModAssaultSMG["Inaccuracy"] = 0.01
+        ModFlintCannon["Inaccuracy"] = 0.01
+        ModSuppPistol["Inaccuracy"] = 0.01
+        ModNERFBlaster["Inaccuracy"] = 0.01
+        ModHeavyAR["Inaccuracy"] = 0.01
+        ModScopedAR["Inaccuracy"] = 0.01
+    end
+    )
+    
+    Main:Button(
+        "Mod Accuracy",
+        function()
+    local ModTac = require(game.ReplicatedStorage.Weapons.Modules["Tac Shotgun"])
+    local ModSupSMG = require(game.ReplicatedStorage.Weapons.Modules["Suppressed SMG"])
+    local ModRPG = require(game.ReplicatedStorage.Weapons.Modules["RPG"])
+    local ModSMG = require(game.ReplicatedStorage.Weapons.Modules["SMG"])
+    local ModPumpShotgun = require(game.ReplicatedStorage.Weapons.Modules["Pump Shotgun"])
+    local ModBurstAR = require(game.ReplicatedStorage.Weapons.Modules["Burst AR"])
+    local ModAssaultRifle = require(game.ReplicatedStorage.Weapons.Modules["Assault Rifle"])
+    local ModDrum = require(game.ReplicatedStorage.Weapons.Modules["Drum Gun"])
+    local ModCombatAR = require(game.ReplicatedStorage.Weapons.Modules["Combat AR"])
+    local ModHawk = require(game.ReplicatedStorage.Weapons.Modules["Desert Hawk"])
+    local ModCombatBurst = require(game.ReplicatedStorage.Weapons.Modules["Combat Burst"])
+    local ModHuntingRifle = require(game.ReplicatedStorage.Weapons.Modules["Hunting Rifle"])
+    local ModAssaultSMG = require(game.ReplicatedStorage.Weapons.Modules["Assault SMG"])
+    local ModPistol = require(game.ReplicatedStorage.Weapons.Modules["Pistol"])
+    local ModFlintCannon = require(game.ReplicatedStorage.Weapons.Modules["Flint Cannon"])
+    local ModSuppPistol = require(game.ReplicatedStorage.Weapons.Modules["Suppressed Pistol"])
+    local ModNERFBlaster = require(game.ReplicatedStorage.Weapons.Modules["NERF Blaster"])
+    local ModHeavyAR = require(game.ReplicatedStorage.Weapons.Modules["Heavy AR"])
+    local ModScopedAR = require(game.ReplicatedStorage.Weapons.Modules["Scoped AR"])
+    
+        ModTac["FireShotAccuracy"] = 0.01
+        ModSupSMG["FireShotAccuracy"] = 0.01
+        ModSMG["FireShotAccuracy"] = 0.01
+        ModRPG["FireShotAccuracy"] = 0.01
+        ModPumpShotgun["FireShotAccuracy"] = 0.01
+        ModBurstAR["FireShotAccuracy"] = 0.01
+        ModPistol["FireShotAccuracy"] = 0.01
+        ModDrum["FireShotAccuracy"] = 0.01
+        ModAssaultRifle["FireShotAccuracy"] = 0.01
+        ModCombatAR["FireShotAccuracy"] = 0.01
+        ModHawk["FireShotAccuracy"] = 0.01
+        ModCombatBurst["FireShotAccuracy"] = 0.01
+        ModHuntingRifle["FireShotAccuracy"] = 0.01
+        ModAssaultSMG["FireShotAccuracy"] = 0.01
+        ModFlintCannon["FireShotAccuracy"] = 0.01
+        ModSuppPistol["FireShotAccuracy"] = 0.01
+        ModNERFBlaster["FireShotAccuracy"] = 0.01
+        ModHeavyAR["FireShotAccuracy"] = 0.01
+        ModScopedAR["FireShotAccuracy"] = 0.01
+    end
+    )
+    
+    More:Button(
+        "FE Admin (Press ; )",
+        function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/MQ3wc7Zq", true))()
+    end
+    )
+    
+    More:Button(
+        "Rejoin On Votekick",
+        function()
+        getgenv().Toggle = true
+    game:GetService("RunService").Heartbeat:Connect(function()
+      if getgenv().Toggle then
+       if game:GetService("Players").LocalPlayer.PlayerGui.MenuUI.VoteKick and game:GetService("Players").LocalPlayer.PlayerGui.MenuUI.VoteKick.Title.Text == "Vote Kick <font color = '#FFA500'>".. game.Players.LocalPlayer.Name .. "</font>?" then
+    game:GetService("TeleportService"):Teleport(game.PlaceId)
+       else
+    wait()
+    end
+    end
+    end)
+    end
+    )
+    
+    Credits:Button(
+        "Print Credits",
+        function()
+        print("Script Made By FromTheDarkness#6257, Motivation From Iraxs On Youtube!")
+    end
+    )
+end
+
+if game.PlaceId == 4999590694 then
+    
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
+    Text = "Zombie Defense Tycoon: Zack's Cool Hub Loaded. (MADE BY FromTheDarkness#6257) AND SUBSCRIBE TO IRAXS ON YOUTUBE :)",
+    Color = Color3.fromRGB(0, 255, 0)
+    })
+    
+    wait(1)
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/mag"))()
+    local Main = Library.Category("Main", "Main Zombies", Color3.fromRGB(0, 0, 255))
+    local More = Library.Category("More", "Other Stuff", Color3.fromRGB(0, 0, 255))
+    local Info = Library.Category("Controls", "Info", Color3.fromRGB(0, 0, 255))
+    Main:Section("Main Stuff")
+    More:Section("Other Scripts")
+    Info:Section("Info")
+    
+    Main:Button(
+        "Kill Zombie",
+        function()
+            while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Zombie.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Creature",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Creature.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Lizard Man",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lizard Man").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Starter",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.StarterZombie.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Hazmat",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Hazmat Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Thanos (press more)",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Thanos.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Thanos.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Thanos.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Thanos.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Thanos.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Thanos.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Polar",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Polar.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Snowman",
+        function()
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Snowman.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+        
+    Main:Button(
+        "Kill Grenade",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Grenade Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Electric",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Electric Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Scientist",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Scientist.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+        
+    Main:Button(
+        "Kill Tank",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Tank Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+        
+    Main:Button(
+        "Kill Speed",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Speed Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Pitcher",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Pitcher").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+            end
+        end)
+    
+    Main:Button(
+        "Kill Santa (press more)",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Santa.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                end
+                            while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Santa.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                            end
+                        while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Santa.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                        end
+                        while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Santa.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                        end
+                        while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies.Santa.Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                        end
+        end
+    )
+    
+    Main:Button(
+        "Kill Lava (press more)",
+        function()
+                while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+                    while wait() do
+                local args = {
+                    [1] = "FireShot",
+                    [2] = "Witness",
+                    [3] = workspace.Zombies:FindFirstChild("Lava Zombie").Head,
+                    [4] = nil
+                }
+                
+                game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+                    end
+        end)
+    
+    More:Button(
+        "Infinite Ammo",
+        function()
+    local ModAK = require(game.ReplicatedStorage.GunSettings["AK-47"])
+    local ModWitness = require(game.ReplicatedStorage.GunSettings["Witness"])
+    local ModGlock = require(game.ReplicatedStorage.GunSettings["Glock"])
+    local ModPDeagle = require(game.ReplicatedStorage.GunSettings["Plasma Deagle"])
+    local ModRevolver = require(game.ReplicatedStorage.GunSettings["Revolver"])
+    local ModTacPistol = require(game.ReplicatedStorage.GunSettings["TacticalPistol"])
+    local ModSkorp = require(game.ReplicatedStorage.GunSettings["Skorpion"])
+    local ModP90 = require(game.ReplicatedStorage.GunSettings["P90"])
+    local ModPEvo = require(game.ReplicatedStorage.GunSettings["Plasma Evo"])
+    local ModDeagle = require(game.ReplicatedStorage.GunSettings["Deagle"])
+    local ModSCARL = require(game.ReplicatedStorage.GunSettings["SCAR-L"])
+    local ModM4 = require(game.ReplicatedStorage.GunSettings["M4"])
+    local ModAWP = require(game.ReplicatedStorage.GunSettings["AWP"])
+    local ModEvo = require(game.ReplicatedStorage.GunSettings["Evo"])
+    local ModTGun = require(game.ReplicatedStorage.GunSettings["Tommy Gun"])
+    local ModCS = require(game.ReplicatedStorage.GunSettings["Cyber Sniper"])
+    local ModMGun = require(game.ReplicatedStorage.GunSettings["Minigun"])
+    local ModAUG = require(game.ReplicatedStorage.GunSettings["AUG"])
+    local ModM16A4 = require(game.ReplicatedStorage.GunSettings["M16A4"])
+    local ModFamas = require(game.ReplicatedStorage.GunSettings["Famas"])
+    local ModDB = require(game.ReplicatedStorage.GunSettings["Double Barrel"])
+    local ModSlugS = require(game.ReplicatedStorage.GunSettings["Slug Shotgun"])
+    local ModFlameS = require(game.ReplicatedStorage.GunSettings["FlameSpitter"])
+    local ModNinjaS = require(game.ReplicatedStorage.GunSettings["Ninja Star"])
+    local ModVSS = require(game.ReplicatedStorage.GunSettings["VSS"])
+    local ModGG = require(game.ReplicatedStorage.GunSettings["Golden Gun"])
+    local ModKar = require(game.ReplicatedStorage.GunSettings["Kar"])
+    local ModAS12 = require(game.ReplicatedStorage.GunSettings["AS-12"])
+    local ModSupSMG = require(game.ReplicatedStorage.GunSettings["Suppressed SMG"])
+    local ModFlintlock = require(game.ReplicatedStorage.GunSettings["Flintlock"])
+    local ModShred = require(game.ReplicatedStorage.GunSettings["Shredder"])
+    local ModChristmasL = require(game.ReplicatedStorage.GunSettings["Christmas Launcher"])
+    local ModNS = require(game.ReplicatedStorage.GunSettings["Neon Scar"])
+    
+        ModAK["MagSize"] = 999999
+        ModWitness["MagSize"] = 999999
+        ModGlock["MagSize"] = 999999
+        ModPDeagle["MagSize"] = 999999
+        ModRevolver["MagSize"] = 999999
+        ModTacPistol["MagSize"] = 999999
+        ModSkorp["MagSize"] = 999999
+        ModP90["MagSize"] = 999999
+        ModPEvo["MagSize"] = 999999
+        ModDeagle["MagSize"] = 999999
+        ModM4["MagSize"] = 999999
+        ModAWP["MagSize"] = 999999
+        ModEvo["MagSize"] = 999999
+        ModTGun["MagSize"] = 999999
+        ModCS["MagSize"] = 999999
+        ModMGun["MagSize"] = 999999
+        ModAUG["MagSize"] = 999999
+        ModM16A4["MagSize"] = 999999
+        ModFamas["MagSize"] = 999999
+        ModDB["MagSize"] = 999999
+        ModSlugS["MagSize"] = 999999
+        ModFlameS["MagSize"] = 999999
+        ModNinjaS["MagSize"] = 999999
+        ModVSS["MagSize"] = 999999
+        ModGG["MagSize"] = 999999
+        ModKar["MagSize"] = 999999
+        ModAS12["MagSize"] = 999999
+        ModSupSMG["MagSize"] = 999999
+        ModFlintlock["MagSize"] = 999999
+        ModShred["MagSize"] = 999999
+        ModChristmasL["MagSize"] = 999999
+        ModNS["MagSize"] = 999999
+    end
+    )
+    
+    More:Button(
+        "No Spread",
+        function()
+    local ModAK = require(game.ReplicatedStorage.GunSettings["AK-47"])
+    local ModWitness = require(game.ReplicatedStorage.GunSettings["Witness"])
+    local ModGlock = require(game.ReplicatedStorage.GunSettings["Glock"])
+    local ModPDeagle = require(game.ReplicatedStorage.GunSettings["Plasma Deagle"])
+    local ModRevolver = require(game.ReplicatedStorage.GunSettings["Revolver"])
+    local ModTacPistol = require(game.ReplicatedStorage.GunSettings["TacticalPistol"])
+    local ModSkorp = require(game.ReplicatedStorage.GunSettings["Skorpion"])
+    local ModP90 = require(game.ReplicatedStorage.GunSettings["P90"])
+    local ModPEvo = require(game.ReplicatedStorage.GunSettings["Plasma Evo"])
+    local ModDeagle = require(game.ReplicatedStorage.GunSettings["Deagle"])
+    local ModSCARL = require(game.ReplicatedStorage.GunSettings["SCAR-L"])
+    local ModM4 = require(game.ReplicatedStorage.GunSettings["M4"])
+    local ModAWP = require(game.ReplicatedStorage.GunSettings["AWP"])
+    local ModEvo = require(game.ReplicatedStorage.GunSettings["Evo"])
+    local ModTGun = require(game.ReplicatedStorage.GunSettings["Tommy Gun"])
+    local ModCS = require(game.ReplicatedStorage.GunSettings["Cyber Sniper"])
+    local ModMGun = require(game.ReplicatedStorage.GunSettings["Minigun"])
+    local ModAUG = require(game.ReplicatedStorage.GunSettings["AUG"])
+    local ModM16A4 = require(game.ReplicatedStorage.GunSettings["M16A4"])
+    local ModFamas = require(game.ReplicatedStorage.GunSettings["Famas"])
+    local ModDB = require(game.ReplicatedStorage.GunSettings["Double Barrel"])
+    local ModSlugS = require(game.ReplicatedStorage.GunSettings["Slug Shotgun"])
+    local ModFlameS = require(game.ReplicatedStorage.GunSettings["FlameSpitter"])
+    local ModNinjaS = require(game.ReplicatedStorage.GunSettings["Ninja Star"])
+    local ModVSS = require(game.ReplicatedStorage.GunSettings["VSS"])
+    local ModGG = require(game.ReplicatedStorage.GunSettings["Golden Gun"])
+    local ModKar = require(game.ReplicatedStorage.GunSettings["Kar"])
+    local ModAS12 = require(game.ReplicatedStorage.GunSettings["AS-12"])
+    local ModSupSMG = require(game.ReplicatedStorage.GunSettings["Suppressed SMG"])
+    local ModFlintlock = require(game.ReplicatedStorage.GunSettings["Flintlock"])
+    local ModShred = require(game.ReplicatedStorage.GunSettings["Shredder"])
+    local ModChristmasL = require(game.ReplicatedStorage.GunSettings["Christmas Launcher"])
+    local ModNS = require(game.ReplicatedStorage.GunSettings["Neon Scar"])
+    
+        ModAK["Spread"] = 0.01
+        ModWitness["Spread"] = 0.01
+        ModGlock["Spread"] = 0.01
+        ModPDeagle["Spread"] = 0.01
+        ModRevolver["Spread"] = 0.01
+        ModTacPistol["Spread"] = 0.01
+        ModSkorp["Spread"] = 0.01
+        ModP90["Spread"] = 0.01
+        ModPEvo["Spread"] = 0.01
+        ModDeagle["Spread"] = 0.01
+        ModSCARL["Spread"] = 0.01
+        ModM4["Spread"] = 0.01
+        ModAWP["Spread"] = 0.01
+        ModEvo["Spread"] = 0.01
+        ModTGun["Spread"] = 0.01
+        ModCS["Spread"] = 0.01
+        ModMGun["Spread"] = 0.01
+        ModAUG["Spread"] = 0.01
+        ModM16A4["Spread"] = 0.01
+        ModFamas["Spread"] = 0.01
+        ModDB["Spread"] = 0.01
+        ModSlugS["Spread"] = 0.01
+        ModFlameS["Spread"] = 0.01
+        ModNinjaS["Spread"] = 0.01
+        ModVSS["Spread"] = 0.01
+        ModGG["Spread"] = 0.01
+        ModKar["Spread"] = 0.01
+        ModAS12["Spread"] = 0.01
+        ModSupSMG["Spread"] = 0.01
+        ModFlintlock["Spread"] = 0.01
+        ModShred["Spread"] = 0.01
+        ModChristmasL["Spread"] = 0.01
+        ModNS["Spread"] = 0.01
+    end
+    )
+    
+    More:Button(
+        "Fast FireRate",
+        function()
+        local ModAK = require(game.ReplicatedStorage.GunSettings["AK-47"])
+    local ModWitness = require(game.ReplicatedStorage.GunSettings["Witness"])
+    local ModGlock = require(game.ReplicatedStorage.GunSettings["Glock"])
+    local ModPDeagle = require(game.ReplicatedStorage.GunSettings["Plasma Deagle"])
+    local ModRevolver = require(game.ReplicatedStorage.GunSettings["Revolver"])
+    local ModTacPistol = require(game.ReplicatedStorage.GunSettings["TacticalPistol"])
+    local ModSkorp = require(game.ReplicatedStorage.GunSettings["Skorpion"])
+    local ModP90 = require(game.ReplicatedStorage.GunSettings["P90"])
+    local ModPEvo = require(game.ReplicatedStorage.GunSettings["Plasma Evo"])
+    local ModDeagle = require(game.ReplicatedStorage.GunSettings["Deagle"])
+    local ModSCARL = require(game.ReplicatedStorage.GunSettings["SCAR-L"])
+    local ModM4 = require(game.ReplicatedStorage.GunSettings["M4"])
+    local ModAWP = require(game.ReplicatedStorage.GunSettings["AWP"])
+    local ModEvo = require(game.ReplicatedStorage.GunSettings["Evo"])
+    local ModTGun = require(game.ReplicatedStorage.GunSettings["Tommy Gun"])
+    local ModCS = require(game.ReplicatedStorage.GunSettings["Cyber Sniper"])
+    local ModMGun = require(game.ReplicatedStorage.GunSettings["Minigun"])
+    local ModAUG = require(game.ReplicatedStorage.GunSettings["AUG"])
+    local ModM16A4 = require(game.ReplicatedStorage.GunSettings["M16A4"])
+    local ModFamas = require(game.ReplicatedStorage.GunSettings["Famas"])
+    local ModDB = require(game.ReplicatedStorage.GunSettings["Double Barrel"])
+    local ModSlugS = require(game.ReplicatedStorage.GunSettings["Slug Shotgun"])
+    local ModFlameS = require(game.ReplicatedStorage.GunSettings["FlameSpitter"])
+    local ModNinjaS = require(game.ReplicatedStorage.GunSettings["Ninja Star"])
+    local ModVSS = require(game.ReplicatedStorage.GunSettings["VSS"])
+    local ModGG = require(game.ReplicatedStorage.GunSettings["Golden Gun"])
+    local ModKar = require(game.ReplicatedStorage.GunSettings["Kar"])
+    local ModAS12 = require(game.ReplicatedStorage.GunSettings["AS-12"])
+    local ModSupSMG = require(game.ReplicatedStorage.GunSettings["Suppressed SMG"])
+    local ModFlintlock = require(game.ReplicatedStorage.GunSettings["Flintlock"])
+    local ModShred = require(game.ReplicatedStorage.GunSettings["Shredder"])
+    local ModChristmasL = require(game.ReplicatedStorage.GunSettings["Christmas Launcher"])
+    local ModNS = require(game.ReplicatedStorage.GunSettings["Neon Scar"])
+    
+        ModAK["RateOfFire"] = 0.01
+        ModWitness["RateOfFire"] = 0.01
+        ModGlock["RateOfFire"] = 0.01
+        ModPDeagle["RateOfFire"] = 0.01
+        ModRevolver["RateOfFire"] = 0.01
+        ModTacPistol["RateOfFire"] = 0.01
+        ModSkorp["RateOfFire"] = 0.01
+        ModP90["RateOfFire"] = 0.01
+        ModPEvo["RateOfFire"] = 0.01
+        ModDeagle["RateOfFire"] = 0.01
+        ModSCARL["RateOfFire"] = 0.01
+        ModM4["RateOfFire"] = 0.01
+        ModAWP["RateOfFire"] = 0.01
+        ModEvo["RateOfFire"] = 0.01
+        ModTGun["RateOfFire"] = 0.01
+        ModCS["RateOfFire"] = 0.01
+        ModMGun["RateOfFire"] = 0.01
+        ModAUG["RateOfFire"] = 0.01
+        ModM16A4["RateOfFire"] = 0.01
+        ModFamas["RateOfFire"] = 0.01
+        ModDB["RateOfFire"] = 0.01
+        ModSlugS["RateOfFire"] = 0.01
+        ModFlameS["RateOfFire"] = 0.01
+        ModNinjaS["RateOfFire"] = 0.01
+        ModVSS["RateOfFire"] = 0.01
+        ModGG["RateOfFire"] = 0.01
+        ModKar["RateOfFire"] = 0.01
+        ModAS12["RateOfFire"] = 0.01
+        ModSupSMG["RateOfFire"] = 0.01
+        ModFlintlock["RateOfFire"] = 0.01
+        ModShred["RateOfFire"] = 0.01
+        ModChristmasL["RateOfFire"] = 0.01
+        ModNS["RateOfFire"] = 0.01
+    end
+    )
+    
+    More:Button(
+        "Collect All Goo",
+        function()
+    while wait() do
+    local args = {
+        [1] = "CollectDeposit",
+        [2] = workspace.GooDeposits.Goo
+    }
+    
+    game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+    end
+    end
+    )
+    
+    More:Button(
+        "Collect All Airdrops",
+        function()
+    while wait() do
+    local args = {
+        [1] = "CollectDeposit",
+        [2] = workspace.GooDeposits.Airdrop
+    }
+    
+    game:GetService("ReplicatedStorage").CIient:FireServer(unpack(args))
+    end
+    end
+    )
+    
+    More:Button(
+        "FE Admin (press ; )",
+        function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/MQ3wc7Zq", true))()
+        end
+    )
+    
+    Info:Button(
+        "Hide Menu: Right Shift",
+        function()
+        print("Hide Menu: Right Shift")
+    end
+    )
+end
+
+if game.PlaceId == 2399948276 then
+    
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
+    Text = "HRG: Zack's Cool Hub Loaded. (MADE BY FromTheDarkness#6257) AND SUBSCRIBE TO IRAXS ON YOUTUBE :)",
+    Color = Color3.fromRGB(0, 255, 0)
+    })
+    
+wait(1)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/mag"))()
+local Main = Library.Category("Gun Modding", "Gun Mods", Color3.fromRGB(0, 0, 255))
+local More = Library.Category("More Stuff", "More", Color3.fromRGB(0, 0, 255))
+Main:Section("Main Gun Stuff")
+More:Section("Extra Stuff")
+
+Main:Button(
+"Mod AK",
+function()
+local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("AK47")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+Main:Button(
+"Mod M4A1",
+function()
+local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("M4A1")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+Main:Button(
+"Mod Deagle",
+function()
+local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("Deagle")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+Main:Button(
+"Mod Sniper",
+function()
+local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("AWP")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+Main:Button(
+"Mod P90",
+function()
+local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("P90")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+Main:Button(
+"Mod MP9",
+function()
+local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("MP9")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+Main:Button(
+    "Mod MP5",
+    function()
+    local player = game:GetService("Players").LocalPlayer
+
+local gun = player.Backpack:FindFirstChild("MP5")
+
+local sM = require(gun:FindFirstChild("Setting"))
+
+sM["AmmoPerMag"] = 999999999999999
+
+sM["MaxAmmo"] = 999999999999999
+
+sM["Range"] = 999999999999999
+
+sM["FireRate"] = 0.01
+
+sM["ReloadTime"] = 0.01
+
+sM["Spread"] = 0.01
+
+sM["Auto"] = true
+
+sM["EquipTime"] = 0.01
+
+sM["Recoil"] = 0.01
+
+sM["ShotgunEnabled"] = true
+
+sM["ShotgunPumpinSpeed"] = 999999999999999
+
+sM["Accuracy"] = 100
+
+sM["ExplosiveEnabled"] = true
+
+sM["ExplosionSoundEnabled"] = true
+
+sM["ExplosionSoundVolume"] = 10000
+
+sM["CooldownTime"] = 0.01
+
+sM["BloodEnabled"] = false
+
+sM["ExplosionCraterSize"] = 100000
+
+sM["BulletSpeed"] = 999999
+
+sM["BulletTexture"] = "rbxassetid://64002589"
+
+sM["HitSoundPitchMin"] = 5
+
+sM["HitSoundPitchMax"] = 5
+
+sM["HitSoundVolume"] = 5
+end
+)
+
+More:Button(
+"Admin FE (Press ; )",
+function()
+loadstring(game:HttpGet("https://pastebin.com/raw/MQ3wc7Zq", true))()
+end
+)
+
+More:Button(
+    "Inf Yield",
+    function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end
+)
+
+More:Button(
+    "Spam Hub On Top",
+    function()
+while wait(0.4) do
+local args = {
+    [1] = "Zack's Cool Hub on top EZZZZZZZZZZ",
+    [2] = "All"
+}
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+end
+end
+)
+
+if game.PlaceId == 4954752502 then
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
+    Text = "TOM: Zack's Cool Hub Loaded. (Made By FromTheDarkness#6257) AND SUBSCRIBE TO IRAXS ON YOUTUBE :)",
+    Color = Color3.fromRGB(0, 255, 0)
+    })
+    
+wait(1)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/mag"))()
+local Main = Library.Category("Scripts", "Main Scripts", Color3.fromRGB(0, 0, 255))
+Main:Section("Main Stuff")
+
+Main:Button(
+    "GodMode (basically)",
+    function()
+    game.ReplicatedStorage.ImmunityEnabled.Value = true
+end
+)
+
+Main:Button(
+    "Fly Bypass (gui)",
+    function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KazeOnTop/RiceFeFly/main/Wind"))()
+end
+)
+
+Main:Button(
+    "Teleport Bypass (gui)",
+    function()
+    local GameScriptGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Tittle = Instance.new("Frame")
+local Header = Instance.new("TextLabel")
+local isw = Instance.new("TextButton")
+local HGSP = Instance.new("TextButton")
+local afk = Instance.new("TextButton")
+local xButton = Instance.new("TextButton")
+local OpenFrame = Instance.new("Frame")
+local Open = Instance.new("TextButton")
+
+GameScriptGui.Name = "GameScriptGui"
+GameScriptGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = GameScriptGui
+MainFrame.Active = true
+MainFrame.BackgroundColor3 = Color3.new(0.117647, 0.117647, 0.117647)
+MainFrame.BorderSizePixel = 0
+MainFrame.Draggable = true
+MainFrame.Position = UDim2.new(0.39118838, 0, 0.0474308431, 0)
+MainFrame.Size = UDim2.new(0, 240, 0, 240)
+MainFrame.Visible = false
+Tittle.Name = "Tittle"
+Tittle.Parent = MainFrame
+Tittle.BackgroundColor3 = Color3.new(0.0588235, 0.0588235, 0.0588235)
+Tittle.BorderSizePixel = 0
+Tittle.Size = UDim2.new(0, 230, 0, 36)
+
+Header.Name = "Header"
+Header.Parent = MainFrame
+Header.BackgroundColor3 = Color3.new(0.0588235, 0.0588235, 0.0588235)
+Header.BorderSizePixel = 0
+Header.Position = UDim2.new(0.0549645387, 0, 0, 0)
+Header.Size = UDim2.new(0, 226, 0, 36)
+Header.Font = Enum.Font.SciFi
+Header.Text = "Scripts"
+Header.TextColor3 = Color3.new(0.333333, 1, 1)
+Header.TextSize = 14
+
+isw.Name = "isw"
+isw.Parent = MainFrame
+isw.BackgroundColor3 = Color3.new(0.0588235, 0.0588235, 0.0588235)
+isw.BorderSizePixel = 0
+isw.Position = UDim2.new(0.0283687934, 0, 0.417763174, 0)
+isw.Size = UDim2.new(0, 229, 0, 50)
+isw.Font = Enum.Font.SciFi
+isw.Text = "Instant Win"
+isw.TextColor3 = Color3.new(0.333333, 1, 1)
+isw.TextSize = 14
+
+xButton.Name = "xButton"
+xButton.Parent = MainFrame
+xButton.BackgroundColor3 = Color3.new(0.0588235, 0.0588235, 0.0588235)
+xButton.BorderSizePixel = 0
+xButton.Size = UDim2.new(0, 31, 0, 36)
+xButton.Font = Enum.Font.SourceSans
+xButton.Text = "X"
+xButton.TextColor3 = Color3.new(0.333333, 1, 1)
+xButton.TextSize = 20
+
+OpenFrame.Name = "OpenFrame"
+OpenFrame.Parent = GameScriptGui
+OpenFrame.BackgroundColor3 = Color3.new(0.117647, 0.117647, 0.117647)
+OpenFrame.BorderSizePixel = 0
+OpenFrame.Position = UDim2.new(0, 0, 0.707509875, 0)
+OpenFrame.Size = UDim2.new(0, 160, 0, 40)
+
+Open.Name = "Open"
+Open.Parent = OpenFrame
+Open.BackgroundColor3 = Color3.new(0.117647, 0.117647, 0.117647)
+Open.BorderSizePixel = 0
+Open.Position = UDim2.new(0, 0, 0.075000003, 0)
+Open.Size = UDim2.new(0, 158, 0, 37)
+Open.Font = Enum.Font.SciFi
+Open.Text = "Open"
+Open.TextColor3 = Color3.new(0.333333, 1, 1)
+Open.TextSize = 14
+
+isw.MouseButton1Down:connect(function()
+local gmt = getrawmetatable(game)
+setreadonly(gmt, false)
+local oldindex = gmt.__index
+gmt.__index = newcclosure(function(self,b)
+    if b == "CFrame" then
+        CFrame.new()
+    end
+return oldindex(self,b)
+end)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-118.98053741455, 254.00015258789, 47.062557220459)
+end)
+
+xButton.MouseButton1Down:connect(function()
+MainFrame:TweenPosition(UDim2.new(0.384,0,-1,0), 'Out', 'Elastic', 3)
+MainFrame.Visible = false
+OpenFrame.Visible = true
+end)
+
+Open.MouseButton1Down:connect(function()
+OpenFrame.Visible = false
+MainFrame.Visible = true
+MainFrame:TweenPosition(UDim2.new(0.384,0,0.377,0), 'Out', 'Elastic', 3)
+end)
+end
+)
+
+Main:Button(
+    "Bypass WalkSpeed",
+    function()
+    local old
+old = hookfunction(getrawmetatable(game).__namecall,(function(...)
+    local args = {...}
+    local self = args[1]
+    local method = getnamecallmethod()
+    if(self==game and method=="GetService"and args[2]:lower()=="workspace")then
+        return game.ReplicatedStorage
+    end
+    return old(...)
+end))
+local old
+old = hookfunction(getrawmetatable(game).__index,(function(...)
+    local self,key = ...
+    if(self:IsA("Humanoid")and key=="WalkSpeed")then
+        return 16
+    end
+    return old(...)
+end))
+end
+)
+
+Main:Button(
+    "Bypass JumpPower",
+    function()
+    local old
+old = hookfunction(getrawmetatable(game).__namecall,(function(...)
+    local args = {...}
+    local self = args[1]
+    local method = getnamecallmethod()
+    if(self==game and method=="GetService"and args[2]:lower()=="workspace")then
+        return game.ReplicatedStorage
+    end
+    return old(...)
+end))
+local old
+old = hookfunction(getrawmetatable(game).__index,(function(...)
+    local self,key = ...
+    if(self:IsA("Humanoid")and key=="JumpPower")then
+        return 50
+    end
+    return old(...)
+end))
+end
+)
+
+Main:Slider(
+    "Speed (bypass 1st)",
+    16,
+    300,
+    true,
+    function(numbers)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = numbers
+end
+)
+
+Main:Slider(
+    "Jump (bypass 1st)",
+    50,
+    350,
+    true,
+    function(numbers)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = numbers
+end
+)
+end
+end
